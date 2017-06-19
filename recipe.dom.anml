@@ -8,6 +8,7 @@ predicate empty(CookingTool t);
 predicate liquid(Ingredient i);
 
 action pickUpWithHand(Ingredient i) {
+  [start] loc(i) != MICROWAVE;
   [all] empty(HAND) == true :-> false;
   [end] loc(i) := HAND;
 };
@@ -15,20 +16,22 @@ action pickUpWithHand(Ingredient i) {
 action put(Ingredient i, CookingTool t) {
   [start] loc(i) == HAND;
   [all] empty(HAND) == false :-> true;
+  [all] empty(t) == true :-> false;
   [all] loc(i) == HAND :-> t;
-};
-
-action checkIfMicrowaveEmpty() {
-  [start] forall(Ingredient i) { loc(i) == TABLE;}
-  [end] empty(MICROWAVE) == true;
 };
 
 action melt(Ingredient i)
 {
   [start] liquid(i) == false;
-  [start] empty(MICROWAVE) == true;
   [start] loc(i) == MICROWAVE;
   [all] liquid(i) == false :-> true;
 };
 
-//working>?
+action takeOutOfMicrowave(Ingredient i)
+{
+  [start] loc(i) == MICROWAVE;
+  [start] empty(HAND) == true;
+  [all] empty(HAND) == true :-> false;
+  [all] empty(MICROWAVE) == false :-> true;
+  [all] loc(i) == MICROWAVE :-> HAND;
+};

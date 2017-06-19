@@ -1,3 +1,4 @@
+
 instance Ingredient butter, toast;
 instance CookingTool pot;
 [start] loc(butter) := TABLE;
@@ -5,7 +6,7 @@ instance CookingTool pot;
 [start] liquid(butter) := false;
 [start] empty(HAND) := true;
 [start] loc(toast) := TABLE;
+[start] empty(toast) := true;
 
-//--------GOALS----------
 [end] liquid(butter) == true;
 [end] loc(butter) == toast;

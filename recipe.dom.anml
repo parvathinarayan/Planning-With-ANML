@@ -1,0 +1,32 @@
+type CookingTool;
+type Ingredient < CookingTool;
+instance CookingTool HAND, MICROWAVE, TABLE;
+
+function CookingTool loc(Ingredient i);
+
+predicate empty(CookingTool t);
+predicate liquid(Ingredient i);
+
+action pickUpWithHand(Ingredient i) {
+  [all] empty(HAND) == true :-> false;
+  [end] loc(i) := HAND;
+};
+
+action put(Ingredient i, CookingTool t) {
+  [start] loc(i) == HAND;
+  [all] empty(HAND) == false :-> true;
+  [all] loc(i) == HAND :-> t;
+};
+
+action checkIfMicrowaveEmpty() {
+  [start] forall(Ingredient i) { loc(i) == TABLE;}
+  [end] empty(MICROWAVE) == true;
+};
+
+action melt(Ingredient i)
+{
+  [start] liquid(i) == false;
+  [start] empty(MICROWAVE) == true;
+  [start] loc(i) == MICROWAVE;
+  [all] liquid(i) == false :-> true;
+};

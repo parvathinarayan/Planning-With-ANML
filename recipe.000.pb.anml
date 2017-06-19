@@ -1,0 +1,11 @@
+instance Ingredient butter, toast;
+instance CookingTool pot;
+[start] loc(butter) := TABLE;
+[start] empty(MICROWAVE) := true;
+[start] liquid(butter) := false;
+[start] empty(HAND) := true;
+[start] loc(toast) := TABLE;
+
+//--------GOALS----------
+[end] liquid(butter) == true;
+[end] loc(butter) == toast;

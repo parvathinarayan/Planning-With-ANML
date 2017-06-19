@@ -30,3 +30,5 @@ action melt(Ingredient i)
   [start] loc(i) == MICROWAVE;
   [all] liquid(i) == false :-> true;
 };
+
+//working>?

@@ -1,33 +1,45 @@
-type CookingTool;
+type Location;
+type CookingTool < Location;
 type Ingredient < CookingTool;
-instance CookingTool HAND, MICROWAVE, TABLE, TOASTER;
+instance CookingTool HAND, MICROWAVE, TOASTER;
+instance Location TABLE;
 type Toastable < Ingredient;
 
-function CookingTool loc(Ingredient i);
+function Location loc(CookingTool i);
 
 predicate empty(CookingTool t);
-predicate liquid(Ingredient i);
+predicate heated(CookingTool t);
 predicate toasted(Toastable b);
 
-action pickUpWithHand(Ingredient i) {
+action pickUpWithHand(CookingTool i) {
   [start] loc(i) != MICROWAVE;
   [start] loc(i) != TOASTER;
   [all] empty(HAND) == true :-> false;
   [end] loc(i) := HAND;
 };
 
-action put(Ingredient i, CookingTool t) {
+action put(CookingTool i, Location t) {
   [start] loc(i) == HAND;
+  [start] empty(t) == true;
   [all] empty(HAND) == false :-> true;
   [all] empty(t) == true :-> false;
   [all] loc(i) == HAND :-> t;
 };
 
-action melt(Ingredient i)
+action add(CookingTool i, CookingTool t) {
+  [start] loc(i) == HAND;
+//  [start] t != MICROWAVE;
+//  [start] t != TOASTER;
+  [all] empty(HAND) == false :-> true;
+  [all] loc(i) == HAND :-> t;
+  [end] empty(t) := false;
+};
+
+action microwave(CookingTool i)
 {
-  [start] liquid(i) == false;
+  [start] heated(i) == false;
   [start] loc(i) == MICROWAVE;
-  [all] liquid(i) == false :-> true;
+  [all] heated(i) == false :-> true;
 };
 
 action toast(Toastable i)
@@ -37,7 +49,7 @@ action toast(Toastable i)
   [all] toasted(i) == false :-> true;
 };
 
-action takeOutOfMicrowave(Ingredient i)
+action takeOutOfMicrowave(CookingTool i)
 {
   [start] loc(i) == MICROWAVE;
   [start] empty(HAND) == true;

@@ -1,2 +1,2 @@
-# Recipe
-recipe planning
+# Planning with ANML
+Recipe

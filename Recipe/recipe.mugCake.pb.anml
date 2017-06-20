@@ -1,0 +1,27 @@
+instance Ingredient chocolate, bakingSoda, milk, flour;
+instance CookingTool mug;
+instance Location cabinet;
+
+
+[start] loc(chocolate) := TABLE;
+[start] loc(bakingSoda) := TABLE;
+[start] loc(milk) := TABLE;
+[start] loc(flour) := TABLE;
+[start] empty(HAND) := true;
+[start] empty(MICROWAVE) := true;
+[start] empty(mug) := true;
+[start] heated(chocolate) := false;
+[start] heated(mug) := false;
+[start] loc(mug) := cabinet;
+[start] empty(TABLE) := true;
+
+[end] loc(mug) == TABLE;
+[end] heated(chocolate) == true;
+[end] loc(chocolate) == mug;
+[end] loc(bakingSoda) == mug;
+[end] loc(milk) == mug;
+[end] loc(flour) == mug;
+[end] heated(mug) == true;
+[end] empty(mug) == false;
+
+//add hierarchies? 

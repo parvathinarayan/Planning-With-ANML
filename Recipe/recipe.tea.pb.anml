@@ -1,0 +1,15 @@
+instance Ingredient water, teabag;
+instance CookingTool mug;
+
+[start] loc(water) := mug;
+[start] loc(teabag) := TABLE;
+[start] empty(water) := true;
+[start] empty(MICROWAVE) := true;
+[start] empty(mug) := true;
+[start] heated(water) := false;
+[start] empty(HAND) := true;
+
+[end] loc(teabag) == water;
+[end] empty(MICROWAVE) == true;
+[end] empty(mug) == false;
+[end] heated(water) == true;

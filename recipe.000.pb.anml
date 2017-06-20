@@ -1,12 +1,19 @@
 
-instance Ingredient butter, toast;
-instance CookingTool pot;
+instance Ingredient butter;
+instance Toastable bread;
 [start] loc(butter) := TABLE;
 [start] empty(MICROWAVE) := true;
 [start] liquid(butter) := false;
 [start] empty(HAND) := true;
-[start] loc(toast) := TABLE;
-[start] empty(toast) := true;
+//[start] loc(bread) := TABLE;
+[start] empty(bread) := true;
+[start] empty(TOASTER) := true;
+[start] toasted(bread) := false;
+[start] empty(TABLE) := true;
 
+[end] empty(TOASTER) == true;
 [end] liquid(butter) == true;
-[end] loc(butter) == toast;
+[end] toasted(bread) == true;
+[end] loc(butter) == bread;
+[end] loc(bread) == TABLE;
+

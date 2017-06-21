@@ -1,0 +1,48 @@
+type Location;
+type Human with {
+    fluent Location position;
+};
+type Money;
+
+predicate canGetOne(Location l);
+predicate canGetFive(Location l);
+predicate canGetTen(Location l);
+predicate canGetTwenty(Location l);
+
+function Money cash(Human h);
+instance Money nil, one, two, three, four,
+  five, six, seven, eight, nine, ten, eleven,
+  twelve, thirteen, fourteen, fifteen, sixteen,
+  seventeen, eighteen, nineteen, twenty, twenty_one, thirty;
+
+action move(Human h, Location current, Location destination){
+  [all] h.position == current :-> destination;
+};
+
+action getOne(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == nil :-> one;
+};
+
+action getFive(Human h, Location current) {
+  duration := 5;
+  [start] h.position == current;
+  [start] canGetFive(current) == true;
+  [all] cash(h) == nil :-> five;
+};
+
+action getTen(Human h, Location current) {
+  duration := 10;
+  [start] h.position == current;
+  [start] canGetTen(current) == true;
+  [all] cash(h) == nil :-> ten;
+};
+
+action getTwenty(Human h, Location current) {
+  duration := 20;
+  [start] h.position == current;
+  [start] canGetTwenty(current) == true;
+  [all] cash(h) == nil :-> twenty;
+};

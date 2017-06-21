@@ -1,0 +1,14 @@
+instance Location A, B;
+instance Human h;
+canGetOne(B) := true;
+canGetOne(A) := false;
+canGetFive(A) := false;
+canGetFive(B) := true;
+canGetTen(B) := true;
+canGetTen(A) := false;
+canGetTwenty(A) := false;
+canGetTwenty(B) := true;
+[start] h.position := A;
+[start] cash(h) := nil;
+
+[end] cash(h) == one;

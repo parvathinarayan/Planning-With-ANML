@@ -15,6 +15,7 @@ instance CookingTool plate;
 [start] toasted(bread) := false;
 [start] empty(TABLE) := true;
 
+//GOAL: liquid butter on toast on plate
 [end] empty(TOASTER) == true;
 [end] heated(butter) == true;
 [end] toasted(bread) == true;

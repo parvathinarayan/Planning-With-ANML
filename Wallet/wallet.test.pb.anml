@@ -13,4 +13,4 @@ canGetTwenty(B) := true;
 [start] cash(h) := nil;
 
 //move Human h from Location A to Location B to receive 1 dollar
-[end] cash(h) == one;
+[end] cash(h) == five;

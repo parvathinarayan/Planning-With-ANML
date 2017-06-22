@@ -26,22 +26,78 @@ action getOne(Human h, Location current) {
   [all] cash(h) == nil :-> one;
 };
 
+//2
+action getOne2(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == one :-> two;
+};
+
+//3
+action getOne3(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == two :-> three;
+};
+
+//4
+action getOne4(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == three :-> four;
+};
+
 action getFive(Human h, Location current) {
-  duration := 5;
+  duration := 4;
   [start] h.position == current;
   [start] canGetFive(current) == true;
   [all] cash(h) == nil :-> five;
 };
 
+//6
+action getOne6(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == five :-> six;
+};
+
+//7
+action getOne7(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == six :-> seven;
+};
+
+//8
+action getOne8(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == seven :-> eight;
+};
+
+//9
+action getOne8(Human h, Location current) {
+  duration := 1;
+  [start] h.position == current;
+  [start] canGetOne(current) == true;
+  [all] cash(h) == eight :-> nine;
+};
+
 action getTen(Human h, Location current) {
-  duration := 10;
+  duration := 7;
   [start] h.position == current;
   [start] canGetTen(current) == true;
   [all] cash(h) == nil :-> ten;
 };
 
 action getTwenty(Human h, Location current) {
-  duration := 20;
+  duration := 13;
   [start] h.position == current;
   [start] canGetTwenty(current) == true;
   [all] cash(h) == nil :-> twenty;

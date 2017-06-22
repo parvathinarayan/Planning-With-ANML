@@ -15,6 +15,7 @@ instance Location cabinet;
 [start] loc(mug) := cabinet;
 [start] empty(TABLE) := true;
 
+//GOAL: melt chocolate, add chocolate and rest of ingredients into mug, heat up mug. 
 [end] loc(mug) == TABLE;
 [end] heated(chocolate) == true;
 [end] loc(chocolate) == mug;
@@ -24,4 +25,4 @@ instance Location cabinet;
 [end] heated(mug) == true;
 [end] empty(mug) == false;
 
-//add hierarchies? 
+//add hierarchies? otherwise mug microwaved before ingredients added...

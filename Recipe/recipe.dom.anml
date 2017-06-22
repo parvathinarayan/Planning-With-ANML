@@ -18,6 +18,7 @@ action pickUpWithHand(CookingTool i) {
   [end] loc(i) := HAND;
 };
 
+//puts when Location t empty
 action put(CookingTool i, Location t) {
   [start] loc(i) == HAND;
   [start] empty(t) == true;
@@ -26,6 +27,7 @@ action put(CookingTool i, Location t) {
   [all] loc(i) == HAND :-> t;
 };
 
+//adds when CookingTool is not empty
 action add(CookingTool i, CookingTool t) {
   [start] loc(i) == HAND;
 //  [start] t != MICROWAVE;

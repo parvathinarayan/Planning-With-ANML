@@ -30,8 +30,6 @@ action put(CookingTool i, Location t) {
 //adds when CookingTool is not empty
 action add(CookingTool i, CookingTool t) {
   [start] loc(i) == HAND;
-//  [start] t != MICROWAVE;
-//  [start] t != TOASTER;
   [all] empty(HAND) == false :-> true;
   [all] loc(i) == HAND :-> t;
   [end] empty(t) := false;

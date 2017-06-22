@@ -1,1 +1,26 @@
+type Clothing;
+type Socks < Clothing;
+type Shoes < Clothing;
+type Underwear;
+type Pants;
+type Shirt;
+type Jacket;
 
+type Human;
+
+predicate isUnderwear(Clothing c);
+predicate isShoes(Clothing c);
+
+predicate hasShoes(Human h);
+predicate hasSocks(Human h);
+predicate hasPants(Human h);
+predicate hasShirt(Human h);
+predicate hasUnderwear(Human h);
+predicate hasJacket(Human h);
+
+action putOn(Human h, Clothing c)
+{
+  :decomposition {
+
+  };
+};

@@ -9,6 +9,7 @@ instance CookingTool mug;
 [start] heated(water) := false;
 [start] empty(HAND) := true;
 
+//GOAL: microwave mug with water so water hot, add teabag
 [end] loc(teabag) == water;
 [end] empty(MICROWAVE) == true;
 [end] empty(mug) == false;

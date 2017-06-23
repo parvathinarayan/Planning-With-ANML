@@ -1,0 +1,136 @@
+//are decompositions enough to make a plan "hierarchical"?
+//what does motivated do?
+
+
+type Clothing;
+type Socks < Clothing;
+type Shoes < Clothing;
+type Underwear < Clothing;
+type Pants < Clothing;
+type Shirt < Clothing;
+type Jacket < Clothing;
+
+instance Clothing SHOES, SOCKS, PANTS, SHIRT, UNDERWEAR, JACKET;
+
+type Human;
+
+function Clothing type(Clothing c);
+
+predicate tied(Shoes s);
+predicate buttoned(Shirt s);
+predicate zipped(Jacket j);
+
+predicate hasShoes(Human h);
+predicate hasSocks(Human h);
+predicate hasPants(Human h);
+predicate hasShirt(Human h);
+predicate hasUnderwear(Human h);
+predicate hasJacket(Human h);
+
+action putOn(Human h, Clothing c)
+{
+  :decomposition {
+    [start] type(c) == SHOES;
+    [start] hasPants(h) == true;
+    [start] hasSocks(h) == true;
+    [all] hasShoes(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasUnderwear(h) == true;
+    [start] type(c) == SOCKS;
+    [all] hasSocks(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasUnderwear(h) == true;
+    [start] hasShoes(h) == false;
+    [start] type(c) == PANTS;
+    [all] hasPants(h) == false :-> true;
+  };
+  :decomposition {
+    [start] type(c) == SHIRT;
+    [all] hasShirt(h) == false :-> true;
+  };
+  :decomposition {
+    [start] type(c) == UNDERWEAR;
+    [all] hasUnderwear(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasShirt(h) == true;
+    [start] type(c) == JACKET;
+    [all] hasJacket(h) == false :-> true;
+  };
+};
+
+
+action takeOff(Human h, Clothing c)
+{
+  :decomposition {
+    [start] type(c) == SHOES;
+    [start] tied(c) == false;
+    [all] hasShoes(h) == true :-> false;
+  };
+  :decomposition {
+    [start] hasShoes(h) == false;
+    [start] type(c) == SOCKS;
+    [all] hasSocks(h) == true :-> false;
+  };
+  :decomposition {
+    [start] hasShoes(h) == false;
+    [start] type(c) == PANTS;
+    [all] hasPants(h) == true :-> false;
+  };
+  :decomposition {
+    [start] type(c) == SHIRT;
+    [start] hasJacket(h) == false;
+    [start] buttoned(c) ==false;
+    [all] hasShirt(h) == true :-> false;
+  };
+  :decomposition {
+    [start] type(c) == UNDERWEAR;
+    [start] hasPants(h) == false;
+    [all] hasUnderwear(h) == true :-> false;
+  };
+  :decomposition {
+    [start] type(c) == JACKET;
+    [start] zipped(c) == false;
+    [all] hasJacket(h) == true :-> false;
+  };
+};
+
+action tie(Human h, Shoes s)
+{
+  [start] hasShoes(h) == true;
+  [all] tied(s) == false :-> true;
+};
+
+action button(Human h, Shirt s)
+{
+  [start] hasShirt(h) == true;
+  [start] hasJacket(h) == false;
+  [all] buttoned(s) == false :-> true;
+};
+
+action zip(Human h, Jacket j)
+{
+  [start] hasJacket(h) == true;
+  [all] zipped(j) == false :-> true;
+};
+
+action untie(Human h, Shoes s)
+{
+  [start] hasShoes(h) == true;
+  [all] tied(s) == true :-> false;
+};
+
+action unbutton(Human h, Shirt s)
+{
+  [start] hasShirt(h) == true;
+  [start] hasJacket(h) == false;
+  [all] buttoned(s) == true :-> false;
+};
+
+action unzip(Human h, Jacket j)
+{
+  [start] hasJacket(h) == true;
+  [all] zipped(j) == true :-> false;
+};

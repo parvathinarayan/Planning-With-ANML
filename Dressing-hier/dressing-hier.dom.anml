@@ -1,15 +1,20 @@
 type Clothing;
 type Socks < Clothing;
 type Shoes < Clothing;
-type Underwear;
-type Pants;
-type Shirt;
-type Jacket;
+type Underwear < Clothing;
+type Pants < Clothing;
+type Shirt < Clothing;
+type Jacket < Clothing;
 
 type Human;
 
-predicate isUnderwear(Clothing c);
 predicate isShoes(Clothing c);
+predicate isSocks(Clothing c);
+predicate isPants(Clothing c);
+predicate isShirt(Clothing c);
+predicate isUnderwear(Clothing c);
+predicate isJacket(Clothing c);
+
 
 predicate hasShoes(Human h);
 predicate hasSocks(Human h);
@@ -21,6 +26,31 @@ predicate hasJacket(Human h);
 action putOn(Human h, Clothing c)
 {
   :decomposition {
-
+    [start] isShoes(c) == true;
+    [start] hasSocks(h) == true;
+    [all] hasShoes(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasUnderwear(h) == true;
+    [start] isSocks(c) == true;
+    [all] hasSocks(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasUnderwear(h) == true;
+    [start] isPants(c) == true;
+    [all] hasPants(h) == false :-> true;
+  };
+  :decomposition {
+    [start] isShirt(c) == true;
+    [all] hasShirt(h) == false :-> true;
+  };
+  :decomposition {
+    [start] isUnderwear(c) == true;
+    [all] hasUnderwear(h) == false :-> true;
+  };
+  :decomposition {
+    [start] hasShirt(h) == true;
+    [start] isJacket(c) == true;
+    [all] hasJacket(h) == false :-> true;
   };
 };

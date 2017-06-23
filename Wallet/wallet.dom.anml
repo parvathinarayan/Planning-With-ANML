@@ -12,8 +12,7 @@ predicate canGetTwenty(Location l);
 function Money cash(Human h);
 instance Money nil, one, two, three, four,
   five, six, seven, eight, nine, ten, eleven,
-  twelve, thirteen, fourteen, fifteen, sixteen,
-  seventeen, eighteen, nineteen, twenty, twenty_one, thirty;
+  twelve, thirteen, fourteen, fifteen;
 
 action move(Human h, Location current, Location destination){
   [all] h.position == current :-> destination;
@@ -23,82 +22,76 @@ action getOne(Human h, Location current) {
   duration := 1;
   [start] h.position == current;
   [start] canGetOne(current) == true;
-  [all] cash(h) == nil :-> one;
-};
-
-//2
-action getOne2(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == one :-> two;
-};
-
-//3
-action getOne3(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == two :-> three;
-};
-
-//4
-action getOne4(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == three :-> four;
+  :decomposition {
+    [all] cash(h) == nil :-> one;
+  };
+  :decomposition {
+    [all] cash(h) == one :-> two;
+  };
+  :decomposition {
+    [all] cash(h) == two :-> three;
+  };
+  :decomposition {
+    [all] cash(h) == three :-> four;
+  };
+  :decomposition {
+    [all] cash(h) == four :-> five;
+  };
+  :decomposition {
+    [all] cash(h) == five :-> six;
+  };
+  :decomposition {
+    [all] cash(h) == six :-> seven;
+  };
+  :decomposition {
+    [all] cash(h) == seven :-> eight;
+  };
+  :decomposition {
+    [all] cash(h) == eight :-> nine;
+  };
+  :decomposition {
+    [all] cash(h) == nine :-> ten;
+  };
+  :decomposition {
+    [all] cash(h) == ten :-> eleven;
+  };
+  :decomposition {
+    [all] cash(h) == eleven :-> twelve;
+  };
+  :decomposition {
+    [all] cash(h) == twelve :-> thirteen;
+  };
+  :decomposition {
+    [all] cash(h) == thirteen :-> fourteen;
+  };
+  :decomposition {
+    [all] cash(h) == fourteen :-> fifteen;
+  };
 };
 
 action getFive(Human h, Location current) {
   duration := 4;
   [start] h.position == current;
   [start] canGetFive(current) == true;
-  [all] cash(h) == nil :-> five;
-};
-
-//6
-action getOne6(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == five :-> six;
-};
-
-//7
-action getOne7(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == six :-> seven;
-};
-
-//8
-action getOne8(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == seven :-> eight;
-};
-
-//9
-action getOne8(Human h, Location current) {
-  duration := 1;
-  [start] h.position == current;
-  [start] canGetOne(current) == true;
-  [all] cash(h) == eight :-> nine;
+  :decomposition {
+    [all] cash(h) == nil :-> five;
+  };
+  :decomposition {
+    [all] cash(h) == five :-> ten;
+  };
+  :decomposition {
+    [all] cash(h) == ten :-> fifteen;
+  };
 };
 
 action getTen(Human h, Location current) {
   duration := 7;
   [start] h.position == current;
   [start] canGetTen(current) == true;
-  [all] cash(h) == nil :-> ten;
-};
-
-action getTwenty(Human h, Location current) {
-  duration := 13;
-  [start] h.position == current;
-  [start] canGetTwenty(current) == true;
-  [all] cash(h) == nil :-> twenty;
+  :decomposition {
+    [all] cash(h) == nil :-> ten;
+  };
+  :decomposition {
+    [all] cash(h) == five :-> fifteen;
+  };
 };

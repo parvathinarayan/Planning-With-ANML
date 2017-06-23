@@ -1,3 +1,7 @@
+//are decompositions enough to make a plan "hierarchical"?
+//what does motivated do?
+
+
 type Clothing;
 type Socks < Clothing;
 type Shoes < Clothing;
@@ -15,6 +19,9 @@ predicate isShirt(Clothing c);
 predicate isUnderwear(Clothing c);
 predicate isJacket(Clothing c);
 
+predicate tied(Shoes s);
+predicate buttoned(Shirt s);
+predicate zipped(Jacket j);
 
 predicate hasShoes(Human h);
 predicate hasSocks(Human h);
@@ -27,6 +34,7 @@ action putOn(Human h, Clothing c)
 {
   :decomposition {
     [start] isShoes(c) == true;
+    [start] hasPants(h) == true;
     [start] hasSocks(h) == true;
     [all] hasShoes(h) == false :-> true;
   };
@@ -37,6 +45,7 @@ action putOn(Human h, Clothing c)
   };
   :decomposition {
     [start] hasUnderwear(h) == true;
+    [start] hasShoes(h) == false;
     [start] isPants(c) == true;
     [all] hasPants(h) == false :-> true;
   };
@@ -53,4 +62,78 @@ action putOn(Human h, Clothing c)
     [start] isJacket(c) == true;
     [all] hasJacket(h) == false :-> true;
   };
+};
+
+
+action takeOff(Human h, Clothing c)
+{
+  :decomposition {
+    [start] isShoes(c) == true;
+    [start] tied(c) == false;
+    [all] hasShoes(h) == true :-> false;
+  };
+  :decomposition {
+    [start] hasShoes(h) == false;
+    [start] isSocks(c) == true;
+    [all] hasSocks(h) == true :-> false;
+  };
+  :decomposition {
+    [start] hasShoes(h) == false;
+    [start] isPants(c) == true;
+    [all] hasPants(h) == true :-> false;
+  };
+  :decomposition {
+    [start] isShirt(c) == true;
+    [start] hasJacket(h) == false;
+    [start] buttoned(c) ==false;
+    [all] hasShirt(h) == true :-> false;
+  };
+  :decomposition {
+    [start] isUnderwear(c) == true;
+    [start] hasPants(h) == false;
+    [all] hasUnderwear(h) == true :-> false;
+  };
+  :decomposition {
+    [start] isJacket(c) == true;
+    [start] zipped(c) == false;
+    [all] hasJacket(h) == true :-> false;
+  };
+};
+
+action tie(Human h, Shoes s)
+{
+  [start] hasShoes(h) == true;
+  [all] tied(s) == false :-> true;
+};
+
+action button(Human h, Shirt s)
+{
+  [start] hasShirt(h) == true;
+  [start] hasJacket(h) == false;
+  [all] buttoned(s) == false :-> true;
+};
+
+action zip(Human h, Jacket j)
+{
+  [start] hasJacket(h) == true;
+  [all] zipped(j) == false :-> true;
+};
+
+action untie(Human h, Shoes s)
+{
+  [start] hasShoes(h) == true;
+  [all] tied(s) == true :-> false;
+};
+
+action unbutton(Human h, Shirt s)
+{
+  [start] hasShirt(h) == true;
+  [start] hasJacket(h) == false;
+  [all] buttoned(s) == true :-> false;
+};
+
+action unzip(Human h, Jacket j)
+{
+  [start] hasJacket(h) == true;
+  [all] zipped(j) == true :-> false;
 };

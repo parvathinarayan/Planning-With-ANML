@@ -1,0 +1,83 @@
+
+instance Human h;
+
+//BOXERS
+instance Underwear boxers;
+[start] isShoes(boxers) := false;
+[start] isSocks(boxers) := false;
+[start] isPants(boxers) := false;
+[start] isShirt(boxers) := false;
+[start] isUnderwear(boxers) := true;
+[start] isJacket(boxers) := false;
+
+[start] hasUnderwear(h) := false;
+
+//RED SOCKS
+instance Socks red_socks;
+[start] isShoes(red_socks) := false;
+[start] isSocks(red_socks) := true;
+[start] isPants(red_socks) := false;
+[start] isShirt(red_socks) := false;
+[start] isUnderwear(red_socks) := false;
+[start] isJacket(red_socks) := false;
+
+
+[start] hasSocks(h) := false;
+
+//SHOES
+instance Shoes running_shoes;
+[start] isShoes(running_shoes) := true;
+[start] isSocks(running_shoes) := false;
+[start] isPants(running_shoes) := false;
+[start] isShirt(running_shoes) := false;
+[start] isUnderwear(running_shoes) := false;
+[start] isJacket(running_shoes) := false;
+
+[start] hasShoes(h) := false;
+[start] tied(running_shoes) := false;
+
+//RUNSHORTS
+instance Pants runshorts;
+[start] isShoes(runshorts) := false;
+[start] isSocks(runshorts) := false;
+[start] isPants(runshorts) := true;
+[start] isShirt(runshorts) := false;
+[start] isUnderwear(runshorts) := false;
+[start] isJacket(runshorts) := false;
+
+[start] hasPants(h) := false;
+
+//GREY SHIRT
+instance Shirt grey_shirt;
+[start] isShoes(grey_shirt) := false;
+[start] isSocks(grey_shirt) := false;
+[start] isPants(grey_shirt) := false;
+[start] isShirt(grey_shirt) := true;
+[start] isUnderwear(grey_shirt) := false;
+[start] isJacket(grey_shirt) := false;
+
+[start] hasShirt(h) := false;
+[start] buttoned(grey_shirt) := false;
+
+//SWEATSHIRT
+instance Jacket sweatshirt;
+[start] isShoes(sweatshirt) := false;
+[start] isSocks(sweatshirt) := false;
+[start] isPants(sweatshirt) := false;
+[start] isShirt(sweatshirt) := false;
+[start] isUnderwear(sweatshirt) := false;
+[start] isJacket(sweatshirt) := true;
+
+[start] hasJacket(h) := false;
+[start] zipped(sweatshirt) := false;
+
+[end] hasJacket(h) == true;
+[end] hasShirt(h) == true;
+[end] hasPants(h) == true;
+[end] hasSocks(h) == true;
+[end] hasUnderwear(h) == true;
+[end] hasShoes(h) == true;
+
+[end] zipped(sweatshirt) == true;
+[end] buttoned(grey_shirt) == true;
+[end] tied(running_shoes) == true;
